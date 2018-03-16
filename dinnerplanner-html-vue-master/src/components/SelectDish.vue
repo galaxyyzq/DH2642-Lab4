@@ -1,21 +1,26 @@
 <template>
   <div class="select-dish">
-    <h2>This is the Select Dish screen</h2>
     <!-- We pass the model as property to the Sidebar component -->
-    <sidebar :model="this.model"/>
-    <dishes />
+    <el-row>
+      <el-col :span="6">
+        <sidebar :model="this.model"/>
+      </el-col>
+      <el-col :span="18">
+        <dishes />
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
-  import Sidebar from '@/components/Sidebar'
-  import Dishes from '@/components/Dishes'
+import Sidebar from '@/components/Sidebar'
+import Dishes from '@/components/Dishes'
 
-  export default {
-    props: ['model'],
-    components: {
-      'sidebar': Sidebar,
-      'dishes': Dishes
-    }
+export default {
+  props: ['model'],
+  components: {
+    'sidebar': Sidebar,
+    'dishes': Dishes
   }
+}
 </script>
