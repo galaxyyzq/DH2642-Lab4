@@ -10,6 +10,7 @@ const DinnerModel = function () {
   let observers = [];
   var parent = this;
   this.addMenu=[];
+  var DishCache = {};
 
 
   this.setNumberOfGuests = function (num) {
@@ -56,7 +57,8 @@ this.getTotalMenuPrice = function() {
 //it is removed from the menu and the new one added.
 
 var currentDish = null;
-
+    
+    
 this.addDishToMenu = function(id) {
 
   var state=true;
@@ -87,30 +89,29 @@ this.removeDishFromMenu = function(iditem) {
   // API Calls
 
   this.getAllDishes = function () {
-    const url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=18&offset=0&query=burger&type='
+    const url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=18&offset=0&query=burger&type=';
     return fetch(url, httpOptions)
       .then(processResponse)
       .catch(handleError)
   }
 
-  this.getDish = function (id, callback, errorCallback) {
-    $.ajax( {
-      url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/"+id+"/information",
-      headers: {
-        'X-Mashape-Key': "Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB"
-      },
-      // type:'get',
-      success: function(data) {
-        currentDish = data;
-        callback(data)
-      },
-      error: function(error) {
-        errorCallback(error)
-      }
-    })}
+
+  var getdishAPIURL = function(id) {
+		return "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/" + "recipes/" + id + "/information";
+  }
+    
+  this.getDish = function (id) {
+    if( id in DishCache ){
+      return new Promise((resolve, reject) => { resolve(DishCache[id]) });
+    }else {
+      const url =  getdishAPIURL(id);
+      return fetch(url, httpOptions)
+        .then(processResponse)
+        .then(function(dish) { DishCache[id] = dish; return dish} )
+        .catch(handleError)
+    }
+   }
   
-
-
   // API Helper methods
 
   const processResponse = function (response) {
