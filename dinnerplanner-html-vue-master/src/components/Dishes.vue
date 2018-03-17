@@ -24,7 +24,7 @@
     <!-- dishes result -->
     <em v-if='status === "INITIAL"'>Loading...</em>
     <b v-else-if='status === "ERROR"'>Failed to load data, please try again</b>
-    <router-link v-for="dish in dishes" :id="dish.id" :key="dish.id" :to="'/dish/' + dish.id">
+    <router-link :to="'/dish/' + dish.id" :id="dish.id" :key="dish.id" v-for="dish in dishes" >
       <el-col  :xs="12" :sm="10" :md="5" :lg="5" :xl="5" class="dishbox">
         <el-card :body-style="{ padding: '0px', height: '260px'}">
           <img v-bind:src="baseURI + dish.image" class="dishpic"/>
@@ -40,6 +40,7 @@
 // Alternative to passing the moderl as the component property,
 // we can import the model instance directly
 import { modelInstance } from "../data/DinnerModel";
+
 
 export default {
   // this methods is called by Vue lifecycle when the
@@ -68,6 +69,8 @@ export default {
 }
 
 </script>
+
+
 <style>
 .dishestitle{
   font-size: 24px;

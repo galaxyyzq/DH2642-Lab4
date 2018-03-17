@@ -108,8 +108,7 @@ this.removeDishFromMenu = function(iditem) {
         errorCallback(error)
       }
     })}
-
-
+  
 
 
   // API Helper methods
