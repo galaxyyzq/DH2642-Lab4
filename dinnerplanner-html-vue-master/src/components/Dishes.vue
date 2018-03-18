@@ -5,7 +5,7 @@
     <!-- Search function -->
     <div class="searchbar">
 
-      <el-select v-model="dishtype" placeholder="Type">
+      <el-select v-model="dishtype" @change="changeTypeUrl" placeholder="Type" ref="dishtype">
             <el-option label="Main Course" value="main+course"></el-option>
             <el-option label="Appetizer" value="appetizer"></el-option>
             <el-option label="Salad" value="salad"></el-option>
@@ -21,7 +21,7 @@
     <!-- dishes result -->
     <em v-if='status === "INITIAL"'>Loading...</em>
     <b v-else-if='status === "ERROR"'>Failed to load data, please try again</b>
-    <router-link :to="'/dish/' + dish.id" :id="dish.id" :key="dish.id" v-for="dish in dishes" >
+    <router-link :to="'/dish/' + dish.id" :id="dish.id" :key="dish.id" v-for="dish in filterDish" >
       <el-col  :xs="12" :sm="10" :md="5" :lg="5" :xl="5" class="dishbox">
         <el-card :body-style="{ padding: '0px', height: '260px'}">
           <img v-bind:src="baseURI + dish.image" class="dishpic"/>
@@ -39,11 +39,13 @@
 import { modelInstance } from "../data/DinnerModel";
 
 
+
 export default {
+
+
   // this methods is called by Vue lifecycle when the
   // component is actually shown to the user (mounted to DOM)
   // that's a good place to call the API and get the data
-
   mounted() {
     // when data is retrieved we update it's properties
     // this will cause the component to re-render
@@ -59,10 +61,28 @@ export default {
   data() {
     return {
       status: 'INITIAL',
-      dishes: []
+      dishes: [],
+      dishinput:'',
+      dishtype:''
     }
-    dishinput: ''
+
+  },
+  methods:{
+    changeTypeUrl: function(){
+      // console.log(this.$refs.dishtype.value);
+      modelInstance.selectType = this.$refs.dishtype.value;
+      // console.log(modelInstance.selectType);;
+    }
+  },
+  computed:{
+    filterDish:function(){
+      return this.dishes.filter((dish) => {
+        return dish.title.match(this.dishinput)
+      });
+    }
   }
+
+
 }
 
 </script>

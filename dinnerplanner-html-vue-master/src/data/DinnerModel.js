@@ -10,6 +10,7 @@ const DinnerModel = function () {
   let observers = [];
   var parent = this;
   this.addMenu=[];
+  let selectType='';
 
 
   this.setNumberOfGuests = function (num) {
@@ -56,8 +57,8 @@ this.getTotalMenuPrice = function() {
 //it is removed from the menu and the new one added.
 
 var currentDish = null;
-    
-    
+
+
 this.addDishToMenu = function(id) {
 
   var state=true;
@@ -88,20 +89,20 @@ this.removeDishFromMenu = function(iditem) {
   // API Calls
 
   this.getAllDishes = function () {
-    const url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=18&offset=0&query=burger&type=';
+    const url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=18&offset=0&query=burger&type='+String(selectType);
     return fetch(url, httpOptions)
       .then(processResponse)
       .catch(handleError)
   }
 
-    
+
   this.getDish = function(id) {
     const url = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/" + "recipes/" + id + "/information";
     return fetch(url, httpOptions)
         .then(processResponse)
         .catch(handleError);
   }
-  
+
   // API Helper methods
 
   const processResponse = function (response) {
