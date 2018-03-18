@@ -6,6 +6,7 @@ import { modelInstance } from "@/data/DinnerModel"
 import DishDetail from '@/components/DishDetail';
 import ConfirmDinner from '@/components/ConfirmDinner';
 import PrintPage from '@/components/PrintPage';
+import WatchDetail from '@/components/WatchDetail'
 
 Vue.use(Router)
 
@@ -24,8 +25,8 @@ export default new Router({
     },
     {
       path: '/dish/:id',
-      name: 'DishDetail',
-      component: DishDetail,
+      name: 'WatchDetail',
+      component: WatchDetail,
       props: function(route) {
            return {
           id: route.params.id,

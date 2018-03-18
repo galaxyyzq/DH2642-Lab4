@@ -5,17 +5,14 @@
     <!-- Search function -->
     <div class="searchbar">
 
-      <el-dropdown>
-        <el-button type="normal">Type<i class="el-icon-arrow-down el-icon--right"></i></el-button>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="main+course">Main Course</el-dropdown-item>
-          <el-dropdown-item command="appetizer">Appetizer</el-dropdown-item>
-          <el-dropdown-item command="salad">Salad</el-dropdown-item>
-          <el-dropdown-item command="breakfast">Breakfast</el-dropdown-item>
-          <el-dropdown-item command="soup">Soup</el-dropdown-item>
-          <el-dropdown-item command="sauce">Sauce</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+      <el-select v-model="dishtype" placeholder="Type">
+            <el-option label="Main Course" value="main+course"></el-option>
+            <el-option label="Appetizer" value="appetizer"></el-option>
+            <el-option label="Salad" value="salad"></el-option>
+            <el-option label="Breakfast" value="breakfast"></el-option>
+            <el-option label="Soup" value="soup"></el-option>
+            <el-option label="Sauce" value="sauce"></el-option>
+        </el-select>
 
       <el-input placeholder="Search the Dish" v-model="dishinput" style="width: 300px; margin-left:10px"clearable></el-input>
 
@@ -58,7 +55,7 @@ export default {
       this.status = 'ERROR'
     })
   },
-  props:["model"],
+  props:["model","dishtype","dishinput"],
   data() {
     return {
       status: 'INITIAL',
