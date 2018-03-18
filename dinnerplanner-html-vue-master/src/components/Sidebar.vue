@@ -11,7 +11,10 @@
         </el-row>
       </div>
 
-       <el-button type="primary" round style="width:100%; margin-top:20px;">CONFIRM DINNER</el-button>
+    <router-link :to="'/confirm'">
+            <el-button type="primary" round style="width:100%;margin-top:20px">CONFIRM DINNER</el-button>
+    </router-link>
+
 
     </div>
   </template>

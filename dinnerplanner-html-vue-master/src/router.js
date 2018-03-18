@@ -4,6 +4,8 @@ import Welcome from '@/components/Welcome'
 import SelectDish from '@/components/SelectDish'
 import { modelInstance } from "@/data/DinnerModel"
 import DishDetail from '@/components/DishDetail';
+import ConfirmDinner from '@/components/ConfirmDinner';
+import PrintPage from '@/components/PrintPage';
 
 Vue.use(Router)
 
@@ -30,6 +32,18 @@ export default new Router({
           model: modelInstance
         }
       }
-    }
+    },
+      {
+      path: '/confirm',
+      name: 'ConfirmDinner',
+      component: ConfirmDinner,
+      props: { model: modelInstance }
+    },
+      {
+      path: '/print',
+      name: 'PrintPage',
+      component: PrintPage,
+      props: { model: modelInstance }
+    },
   ]
 })

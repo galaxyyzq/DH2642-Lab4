@@ -10,7 +10,6 @@ const DinnerModel = function () {
   let observers = [];
   var parent = this;
   this.addMenu=[];
-  var DishCache = {};
 
 
   this.setNumberOfGuests = function (num) {
@@ -95,22 +94,13 @@ this.removeDishFromMenu = function(iditem) {
       .catch(handleError)
   }
 
-
-  var getdishAPIURL = function(id) {
-		return "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/" + "recipes/" + id + "/information";
-  }
     
-  this.getDish = function (id) {
-    if( id in DishCache ){
-      return new Promise((resolve, reject) => { resolve(DishCache[id]) });
-    }else {
-      const url =  getdishAPIURL(id);
-      return fetch(url, httpOptions)
+  this.getDish = function(id) {
+    const url = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/" + "recipes/" + id + "/information";
+    return fetch(url, httpOptions)
         .then(processResponse)
-        .then(function(dish) { DishCache[id] = dish; return dish} )
-        .catch(handleError)
-    }
-   }
+        .catch(handleError);
+  }
   
   // API Helper methods
 
