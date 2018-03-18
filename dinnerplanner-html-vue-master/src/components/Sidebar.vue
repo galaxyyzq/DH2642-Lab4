@@ -9,23 +9,34 @@
           <el-col :span="18">DISHNAME</el-col>
           <el-col :span="6">COST</el-col>
         </el-row>
+        <el-row v-for="item in selectDishes">
+          <el-col :span="18">item.title</el-col>
+          <el-col :span="6">item.title</el-col>
+        </el-row>
       </div>
 
-    <router-link :to="'/confirm'">
-            <el-button type="primary" round style="width:100%;margin-top:20px">CONFIRM DINNER</el-button>
-    </router-link>
+      <router-link :to="'/confirm'">
+        <el-button type="primary" round style="width:100%;margin-top:20px">CONFIRM DINNER</el-button>
+      </router-link>
 
 
     </div>
   </template>
 
   <script>
+
+  import { bus } from "../main"
+
   export default {
     props: ['model'],
     // this methods is called by React lifecycle when the
     // component is created that's a good place to setup model observer
     created() {
-      this.model.addObserver(this)
+      this.model.addObserver(this);
+      bus.$on("addToMenu",(data) =>{
+        this.selectDishes.push(data);
+      })
+
     },
 
     // this is called when component is removed destroyed
@@ -37,7 +48,8 @@
     // we define and initalise the data we want to use and modify in the component
     data() {
       return {
-        numberOfGuests: this.model.getNumberOfGuests()
+        numberOfGuests: this.model.getNumberOfGuests(),
+        selectDishes: []
       }
     },
 

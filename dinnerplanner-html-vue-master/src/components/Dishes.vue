@@ -5,7 +5,7 @@
     <!-- Search function -->
     <div class="searchbar">
 
-      <el-select v-model="dishtype" @change="changeTypeUrl" placeholder="Type" ref="dishtype">
+      <el-select id="selecttype" v-model="dishtype" placeholder="Type" ref="dishtype2">
             <el-option label="Main Course" value="main+course"></el-option>
             <el-option label="Appetizer" value="appetizer"></el-option>
             <el-option label="Salad" value="salad"></el-option>
@@ -49,7 +49,10 @@ export default {
   mounted() {
     // when data is retrieved we update it's properties
     // this will cause the component to re-render
-    modelInstance.getAllDishes().then(dishes => {
+    var type='';
+    // console.log(this.dishtype);
+
+    modelInstance.getAllDishes(type).then(dishes => {
       this.status = 'LOADED'
       this.dishes = dishes.results
       this.baseURI = dishes.baseUri
@@ -63,17 +66,16 @@ export default {
       status: 'INITIAL',
       dishes: [],
       dishinput:'',
-      dishtype:''
+      dishtype:'main+course'
     }
 
   },
-  methods:{
-    changeTypeUrl: function(){
-      // console.log(this.$refs.dishtype.value);
-      modelInstance.selectType = this.$refs.dishtype.value;
-      // console.log(modelInstance.selectType);;
-    }
-  },
+  // methods:{
+  //   changeTypeUrl: function(){
+  //     return this.dishtype;
+  //     console.log(this.dishtype);
+  //   }
+  // },
   computed:{
     filterDish:function(){
       return this.dishes.filter((dish) => {

@@ -21,58 +21,12 @@ const DinnerModel = function () {
   this.getNumberOfGuests = function () {
     return numberOfGuests;
   };
-
-  this.getFullMenu = function() {
-  return this.addMenu;
-  notifyObservers();
-}
-
-
-
-//Returns all ingredients for all the dishes on the menu.
-this.getAllIngredients = function() {
-  var menudishes = this.getFullMenu;
-  var ingredients = [];
-  for (key in menudishes) {
-    ingredients[i] = dishes[i].ingredients;
-  }
-  return ingredients;
-  notifyObservers();
-}
-
-//Returns the total price of the menu (all the ingredients multiplied by number of guests).
-this.getTotalMenuPrice = function() {
-  var totalPrice = 0;
-  var menudishes = this.getFullMenu;
-  for (key in menudishes){
-    for (var i=0; i<menudishes[key].ingredients.length;i++){
-      totalPrice = totalPrice + menu[key].ingredients[i].price * guestNumber;
-    }
-  }
-  return totalPrice;
-  notifyObservers();
-}
-
+  
 //Adds the passed dish to the menu. If the dish of that type already exists on the menu
 //it is removed from the menu and the new one added.
 
 var currentDish = null;
 
-
-this.addDishToMenu = function(id) {
-
-  var state=true;
-  for (var i = 0; i < this.addMenu.length; i++) {
-    if (id==this.addMenu[i].id) {
-      state=false;
-    }
-  }
-  if (state) {
-    this.addMenu.push(currentDish);
-  }
-  notifyObservers("menu");
-
-}
 
 //Removes dish from menu
 this.removeDishFromMenu = function(iditem) {
@@ -88,7 +42,7 @@ this.removeDishFromMenu = function(iditem) {
 
   // API Calls
 
-  this.getAllDishes = function () {
+  this.getAllDishes = function (selectType) {
     const url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=18&offset=0&query=burger&type='+String(selectType);
     return fetch(url, httpOptions)
       .then(processResponse)

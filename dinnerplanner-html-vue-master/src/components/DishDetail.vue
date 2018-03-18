@@ -1,43 +1,43 @@
 <template>
-    <div>
-        <h4>ingredient for {{ numberOfGuests }} people</h4>
-        
-        <router-link :to="'/search'">
-            <el-button type="primary" round style="margin-top:20px" class="backtosearch">BACK TO SEARCH</el-button>
-        </router-link>
-        <p>{{ dish.title }}</p> 
-        <img v-bind:src="dish.image" />
-        <p>{{ dish.instructions }}</p>
-         <tr v-for="ingredient in dish.extendedIngredients" :id="ingredient.id" :key="ingredient.id">
-                        <td> 
-                            {{ingredient.name}}
-                        </td>
-                        <td> 
-                            {{numberOfGuests * ingredient.amount  +"  "+ ingredient.unit}}
-                        </td>
-                        <td> 
-                            {{ingredient.amount * 3 *numberOfGuests}}
-                        </td>
-         </tr>
-        <div class="add">
-        <router-link :to="'/search'">
-            <el-button type="primary" round style="margin-top:20px" v-on:Click="adddishtomenu" id="dishID">ADD TO MENU</el-button>
-        </router-link>
-        </div>
-        
+  <div>
+    <h4>ingredient for {{ numberOfGuests }} people</h4>
+
+    <router-link :to="'/search'">
+      <el-button type="primary" round style="margin-top:20px" class="backtosearch">BACK TO SEARCH</el-button>
+    </router-link>
+    <p>{{ dish.title }}</p>
+    <img v-bind:src="dish.image" />
+    <p>{{ dish.instructions }}</p>
+    <tr v-for="ingredient in dish.extendedIngredients" :id="ingredient.id" :key="ingredient.id">
+      <td>
+        {{ingredient.name}}
+      </td>
+      <td>
+        {{numberOfGuests * ingredient.amount  +"  "+ ingredient.unit}}
+      </td>
+      <td>
+        {{ingredient.amount * 3 *numberOfGuests}}
+      </td>
+    </tr>
+    <div class="add">
+      <router-link :to="'/search'">
+        <el-button type="primary" round style="margin-top:20px" v-on:Click="adddishtomenu" id="dishID">ADD TO MENU</el-button>
+      </router-link>
     </div>
+
+  </div>
 
 </template>
 
 <script>
-    
+
 var dishID = this.id;
 
-
 import { modelInstance } from "../data/DinnerModel";
+import { bus } from "../main"
 
 export default {
- mounted() {
+  mounted() {
     modelInstance.getDish(this.id).then(dish => {
       this.status = 'LOADED'
       this.dish = dish
@@ -46,26 +46,26 @@ export default {
     })
     modelInstance.addDishToMenu(this.id);
   },
-    
+
   methods:{
-  adddishtomenu:function(){
-        modelInstance.addDishToMenu(this.id);
+    adddishtomenu:function(){
+      bus.$emit("addToMenu",this.dish)
     }
   },
-    
+
   props:["id","model"],
-    
+
   data: function () {
     return {
-       status: 'INITIAL',
-       numberOfGuests: modelInstance.getNumberOfGuests(),
-       dish: {
-          title:"loading, please wait...",
-          instructions:"",
-          extendedIngredients:[],
+      status: 'INITIAL',
+      numberOfGuests: modelInstance.getNumberOfGuests(),
+      dish: {
+        title:"loading, please wait...",
+        instructions:"",
+        extendedIngredients:[],
       },
       modelInstance: this.model,
-      
+
     }
   }
 
@@ -75,13 +75,12 @@ export default {
 </script>
 
 <style>
-    .backtosearch{
-    position: absolute;
-    right: 20px;
-    top: 120px;
-    }
-    .add{
-    text-align: center;
-    }
+.backtosearch{
+  position: absolute;
+  right: 20px;
+  top: 120px;
+}
+.add{
+  text-align: center;
+}
 </style>
-

@@ -6,7 +6,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 
 Vue.config.productionTip = false
-
+export const bus=new Vue();
 
 Vue.use(ElementUI);
 
