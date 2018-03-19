@@ -3,7 +3,7 @@
     <!-- We pass the model as property to the Sidebar component -->
     <el-row>
       <el-col :span="6">
-        <sidebar :model="this.model"/>
+        <sidebar :model="this.model" v-bind:selectedDishes="selectedDishes"/>
       </el-col>
       <el-col :span="18">
         <dishes />
@@ -17,7 +17,7 @@ import Sidebar from '@/components/Sidebar'
 import Dishes from '@/components/Dishes'
 
 export default {
-  props: ['model'],
+  props: ['model','selectedDishes'],
   components: {
     'sidebar': Sidebar,
     'dishes': Dishes

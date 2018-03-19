@@ -9,7 +9,7 @@
           <el-col :span="18">DISHNAME</el-col>
           <el-col :span="6">COST</el-col>
         </el-row>
-        <el-row v-for="item in selectDishes">
+        <el-row v-for="item in selectedDishes">
           <br>
           <el-col :span="18">{{item.title}}</el-col>
           <el-col :span="6">{{item.pricePerServing*numberOfGuests}}</el-col>
@@ -26,20 +26,14 @@
 
   <script>
 
-  import { bus } from "../main"
 
   export default {
-    props: ['model'],
+    props: ['model','selectedDishes'],
+
     // this methods is called by React lifecycle when the
     // component is created that's a good place to setup model observer
     created() {
       this.model.addObserver(this);
-
-        bus.$on("addToMenu",(data) =>{
-          this.selectDishes.push(data);
-          console.log(this.selectDishes);
-      })
-
     },
 
     // this is called when component is removed destroyed
@@ -52,7 +46,6 @@
     data() {
       return {
         numberOfGuests: this.model.getNumberOfGuests(),
-        selectDishes: []
       }
     },
 
@@ -64,7 +57,7 @@
       },
 
       // our handler for the input's on change event
-      onDidChangeNumberOfGuests(e) {
+       onDidChangeNumberOfGuests(e) {
         this.model.setNumberOfGuests(+e.target.value)
       }
     }

@@ -6,7 +6,7 @@
       </el-col>
       <el-col :span="4">
         <router-link :to="'/search'">
-          <el-button type="normal" round style="margin-top:20px" class="backtosearch">BACK TO SEARCH</el-button>
+          <el-button type="normal" round style="margin-top:20px" class="back">BACK TO SEARCH</el-button>
         </router-link>
       </el-col>
     </el-row>
@@ -16,10 +16,9 @@
           <p class="dishestitle">{{ dish.title }}</p>
           <img v-bind:src="dish.image" />
           <p>{{ dish.instructions }}</p>
-
-          <!-- <router-link :to="'/search'"> -->
+          
             <el-button type="primary" round style="margin-top:20px" v-on:click="adddishtomenu" id="dishID">ADD TO MENU</el-button>
-          <!-- </router-link> -->
+    
 
       </el-col>
       <el-col :span="9">
@@ -53,9 +52,12 @@
 var dishID = this.id;
 
 import { modelInstance } from "../data/DinnerModel";
-import { bus } from "../main"
 
 export default {
+    
+    
+  props:["id","model","selectedDishes"],
+    
   mounted() {
     modelInstance.getDish(this.id).then(dish => {
       this.status = 'LOADED'
@@ -66,12 +68,11 @@ export default {
   },
 
   methods:{
+      
     adddishtomenu:function(){
-      bus.$emit("addToMenu",this.dish)
+     this.selectedDishes.push(this.dish);
     }
   },
-
-  props:["id","model"],
 
   data: function () {
     return {
@@ -83,6 +84,7 @@ export default {
         extendedIngredients:[],
       },
       modelInstance: this.model,
+      selectedDishes:[]
 
     }
   }
@@ -102,6 +104,10 @@ export default {
 
 .dishestitle{
   font-size: 24px;
+}
+.back{
+  position:absolute;
+  top:5px;
 }
 
 </style>

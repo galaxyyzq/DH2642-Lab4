@@ -21,7 +21,7 @@ export default new Router({
       path: '/search',
       name: 'SelectDish',
       component: SelectDish,
-      props: { model: modelInstance }
+      props: { model: modelInstance }  
     },
     {
       path: '/dish/:id',
