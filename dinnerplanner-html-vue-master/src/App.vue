@@ -9,7 +9,7 @@
         <hr>
     </div>
 
-    <router-view v-bind:selectedDishes="selectedDishes"/>
+    <router-view v-bind:selectedDishes="selectedDishes" v-bind:numOfGuests="numOfGuests"/>
 
   </div>
 </template>
@@ -20,7 +20,8 @@ export default {
       
   data(){
     return {
-      selectedDishes:[]
+      selectedDishes:[],
+      numOfGuests:[3]
     }
   }
 }

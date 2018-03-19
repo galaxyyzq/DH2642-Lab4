@@ -2,7 +2,7 @@
   <div>
     <el-row>
       <el-col :span="20">
-          <h4>Ingredient for {{ numberOfGuests }} people</h4>
+          <h4>Ingredient for {{ numOfGuests.length }} people</h4>
       </el-col>
       <el-col :span="4">
         <router-link :to="'/search'">
@@ -31,10 +31,10 @@
               {{ingredient.name}}
             </td>
             <td>
-              {{numberOfGuests * ingredient.amount  +"  "+ ingredient.unit}}
+              {{numOfGuests.length * ingredient.amount  +"  "+ ingredient.unit}}
             </td>
             <td>
-              {{ingredient.amount * 3 *numberOfGuests}}
+              {{ingredient.amount * 3 *numOfGuests.length}}
             </td>
           </tr>
         </div>
@@ -56,7 +56,7 @@ import { modelInstance } from "../data/DinnerModel";
 export default {
     
     
-  props:["id","model","selectedDishes"],
+  props:["id","model","selectedDishes","numOfGuests"],
     
   mounted() {
     modelInstance.getDish(this.id).then(dish => {
@@ -68,16 +68,30 @@ export default {
   },
 
   methods:{
-      
+
     adddishtomenu:function(){
-     this.selectedDishes.push(this.dish);
+
+      // this.selectedDishes.push(this.dish);
+      var isDishExist=false;
+
+      for (var i = 0; i <this.selectedDishes.length; i++) {
+        console.log(this.dish.id);
+        if (this.dish.id === this.selectedDishes[i].id) {
+          alert('This dish is already in your menu');
+          isDishExist=true;
+        }
+      }
+
+      if (!isDishExist) {
+        this.selectedDishes.push(this.dish);
+      }
     }
+      
   },
 
   data: function () {
     return {
       status: 'INITIAL',
-      numberOfGuests: modelInstance.getNumberOfGuests(),
       dish: {
         title:"loading, please wait...",
         instructions:"",

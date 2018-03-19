@@ -1,8 +1,10 @@
 <template>
   <div class="sidebar">
     <p class="sidebartitle">Selected Dish<p>
-      <p>Total number of guests: {{ numberOfGuests }}</p>
-      <el-input-number v-model="numberOfGuests" @change="onDidChangeNumberOfGuests" :min="1" :max="20"></el-input-number>
+      <p>Total number of guests: {{ numOfGuests.length }}</p>
+<!--      <el-input-number v-model="numberOfGuests" @change="onDidChangeNumberOfGuests" :min="1" :max="20"></el-input-number>-->
+      <el-button  v-on:click="plus">+</el-button>{{ numOfGuests.length }}
+      <el-button  v-on:click="minus">-</el-button>
 
       <div class="menudish">
         <el-row>
@@ -12,7 +14,7 @@
         <el-row v-for="item in selectedDishes">
           <br>
           <el-col :span="18">{{item.title}}</el-col>
-          <el-col :span="6">{{item.pricePerServing*numberOfGuests}}</el-col>
+          <el-col :span="6">{{item.pricePerServing*numOfGuests.length}}</el-col>
         </el-row>
       </div>
 
@@ -28,7 +30,7 @@
 
 
   export default {
-    props: ['model','selectedDishes'],
+    props: ['model','selectedDishes','numOfGuests'],
 
     // this methods is called by React lifecycle when the
     // component is created that's a good place to setup model observer
@@ -42,24 +44,14 @@
       this.model.removeObserver(this)
     },
 
-    // we define and initalise the data we want to use and modify in the component
-    data() {
-      return {
-        numberOfGuests: this.model.getNumberOfGuests(),
-      }
-    },
 
     methods: {
-      // in our update function we modify the the property of
-      // the compoented which will cause the component to re-render
-      update() {
-        this.numberOfGuests = this.model.getNumberOfGuests()
+      minus:function(){
+       this.numOfGuests.pop();
       },
-
-      // our handler for the input's on change event
-       onDidChangeNumberOfGuests(e) {
-        this.model.setNumberOfGuests(+e.target.value)
-      }
+       plus:function(){
+       this.numOfGuests.push("0");
+      },
     }
   }
   </script>
