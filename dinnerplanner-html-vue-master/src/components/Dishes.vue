@@ -48,10 +48,8 @@ export default {
   mounted() {
     // when data is retrieved we update it's properties
     // this will cause the component to re-render
-    var type='';
-    console.log(this.dishtype);
 
-    modelInstance.getAllDishes(type).then(dishes => {
+    modelInstance.getAllDishes(this.dishtype).then(dishes => {
       this.status = 'LOADED'
       this.dishes = dishes.results
       this.baseURI = dishes.baseUri
@@ -59,7 +57,8 @@ export default {
       this.status = 'ERROR'
     })
   },
-  props:["model","dishtype","dishinput"],
+
+  //props:["model","dishtype","dishinput"],
   data() {
     return {
       status: 'INITIAL',
@@ -69,12 +68,18 @@ export default {
     }
 
   },
-  // methods:{
-  //   changeTypeUrl: function(){
-  //     return this.dishtype;
-  //     console.log(this.dishtype);
-  //   }
-  // },
+  watch: {
+      dishtype: function(){
+        modelInstance.getAllDishes(this.dishtype).then(dishes => {
+          this.status = 'LOADED'
+          this.dishes = dishes.results
+          this.baseURI = dishes.baseUri
+        }).catch(() => {
+          this.status = 'ERROR'
+        })
+      }
+  },
+
   computed:{
     filterDish:function(){
       return this.dishes.filter((dish) => {

@@ -6,12 +6,13 @@
 
       <div class="menudish">
         <el-row>
-          <el-col :span="18">DISHNAME{{selectDishes.length}}</el-col>
+          <el-col :span="18">DISHNAME</el-col>
           <el-col :span="6">COST</el-col>
         </el-row>
         <el-row v-for="item in selectDishes">
+          <br>
           <el-col :span="18">{{item.title}}</el-col>
-          <el-col :span="6">{{item.title}}</el-col>
+          <el-col :span="6">{{item.pricePerServing*numberOfGuests}}</el-col>
         </el-row>
       </div>
 
@@ -34,10 +35,9 @@
     created() {
       this.model.addObserver(this);
 
-      bus.$on("addToMenu",(data) =>{
-        console.log(this);
-        this.selectDishes.push(data);
-
+        bus.$on("addToMenu",(data) =>{
+          this.selectDishes.push(data);
+          console.log(this.selectDishes);
       })
 
     },

@@ -17,9 +17,9 @@
           <img v-bind:src="dish.image" />
           <p>{{ dish.instructions }}</p>
 
-          <router-link :to="'/search'">
+          <!-- <router-link :to="'/search'"> -->
             <el-button type="primary" round style="margin-top:20px" v-on:click="adddishtomenu" id="dishID">ADD TO MENU</el-button>
-          </router-link>
+          <!-- </router-link> -->
 
       </el-col>
       <el-col :span="9">
@@ -63,7 +63,6 @@ export default {
     }).catch(() => {
       this.status = 'ERROR'
     })
-    modelInstance.addDishToMenu(this.id);
   },
 
   methods:{
