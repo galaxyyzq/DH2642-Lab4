@@ -15,6 +15,7 @@
 <script>
 import Sidebar from '@/components/Sidebar'
 import DisheDetail from '@/components/DishDetail'
+// import { bus } from "../main"
 
 export default {
   props: ['model','id'],

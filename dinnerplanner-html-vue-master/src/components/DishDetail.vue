@@ -1,29 +1,48 @@
 <template>
   <div>
-    <h4>ingredient for {{ numberOfGuests }} people</h4>
+    <el-row>
+      <el-col :span="20">
+          <h4>Ingredient for {{ numberOfGuests }} people</h4>
+      </el-col>
+      <el-col :span="4">
+        <router-link :to="'/search'">
+          <el-button type="normal" round style="margin-top:20px" class="backtosearch">BACK TO SEARCH</el-button>
+        </router-link>
+      </el-col>
+    </el-row>
 
-    <router-link :to="'/search'">
-      <el-button type="primary" round style="margin-top:20px" class="backtosearch">BACK TO SEARCH</el-button>
-    </router-link>
-    <p>{{ dish.title }}</p>
-    <img v-bind:src="dish.image" />
-    <p>{{ dish.instructions }}</p>
-    <tr v-for="ingredient in dish.extendedIngredients" :id="ingredient.id" :key="ingredient.id">
-      <td>
-        {{ingredient.name}}
-      </td>
-      <td>
-        {{numberOfGuests * ingredient.amount  +"  "+ ingredient.unit}}
-      </td>
-      <td>
-        {{ingredient.amount * 3 *numberOfGuests}}
-      </td>
-    </tr>
-    <div class="add">
-      <router-link :to="'/search'">
-        <el-button type="primary" round style="margin-top:20px" v-on:Click="adddishtomenu" id="dishID">ADD TO MENU</el-button>
-      </router-link>
-    </div>
+    <el-row>
+      <el-col :span="15" style="padding-right:15px;">
+          <p class="dishestitle">{{ dish.title }}</p>
+          <img v-bind:src="dish.image" />
+          <p>{{ dish.instructions }}</p>
+
+          <router-link :to="'/search'">
+            <el-button type="primary" round style="margin-top:20px" v-on:click="adddishtomenu" id="dishID">ADD TO MENU</el-button>
+          </router-link>
+
+      </el-col>
+      <el-col :span="9">
+        <div class="ingredientbox">
+          <h3>Ingredient Detail</h3>
+          <hr>
+          <br>
+          <tr v-for="ingredient in dish.extendedIngredients" :id="ingredient.id" :key="ingredient.id">
+            <td>
+              {{ingredient.name}}
+            </td>
+            <td>
+              {{numberOfGuests * ingredient.amount  +"  "+ ingredient.unit}}
+            </td>
+            <td>
+              {{ingredient.amount * 3 *numberOfGuests}}
+            </td>
+          </tr>
+        </div>
+      </el-col>
+    </el-row>
+
+
 
   </div>
 
@@ -75,12 +94,15 @@ export default {
 </script>
 
 <style>
-.backtosearch{
-  position: absolute;
-  right: 20px;
-  top: 120px;
+
+.ingredientbox{
+  border: solid 1px #ccc;
+  margin: 20px 12px 20px 12px;
+  padding: 10px 12px 20px 12px;
 }
-.add{
-  text-align: center;
+
+.dishestitle{
+  font-size: 24px;
 }
+
 </style>

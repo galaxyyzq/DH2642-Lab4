@@ -49,7 +49,7 @@ export default {
     // when data is retrieved we update it's properties
     // this will cause the component to re-render
     var type='';
-    // console.log(this.dishtype);
+    console.log(this.dishtype);
 
     modelInstance.getAllDishes(type).then(dishes => {
       this.status = 'LOADED'
