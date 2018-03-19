@@ -6,7 +6,7 @@
         <sidebar :model="this.model"/>
       </el-col>
       <el-col :span="18">
-        <detail />
+        <detail :id="this.id" :model="this.model"/>
       </el-col>
     </el-row>
   </div>
@@ -17,7 +17,7 @@ import Sidebar from '@/components/Sidebar'
 import DisheDetail from '@/components/DishDetail'
 
 export default {
-  props: ['model'],
+  props: ['model','id'],
   components: {
     'sidebar': Sidebar,
     'detail': DisheDetail

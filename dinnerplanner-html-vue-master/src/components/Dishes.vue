@@ -42,7 +42,6 @@ import { modelInstance } from "../data/DinnerModel";
 
 export default {
 
-
   // this methods is called by Vue lifecycle when the
   // component is actually shown to the user (mounted to DOM)
   // that's a good place to call the API and get the data
