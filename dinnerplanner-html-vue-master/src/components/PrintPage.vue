@@ -1,54 +1,68 @@
 <template>
-    <div>
-    <h4>My dinner: {{ numOfGuests.length }} people</h4>
-    <router-link :to="'/search'">
-            <el-button type="primary" round style="margin-top:20px" class="backtosearch">GO BACK AND EDIT YOUR DINNER</el-button>
-    </router-link>
-     <div  v-for="item in selectedDishes" >
-          <h3>{{ item.title }}</h3>
-          <img v-bind:src="item.image" />
-          <h4>Preparation</h4>
+  <div>
+    <el-row class="header">
+      <el-col :sm="19">
+        <h3>My dinner for: {{ numOfGuests.length }} people</h3>
+      </el-col>
+      <el-col :sm="5">
+        <router-link :to="'/search'">
+          <el-button type="normal" round style="margin-top:10px" class="backtosearch">GO BACK AND EDIT YOUR DINNER</el-button>
+        </router-link>
+      </el-col>
+    </el-row>
+
+
+    <div v-for="item in selectedDishes" class="printcontent">
+      <h2>{{ item.title }}</h2>
+      <el-row>
+        <el-col :lg="10">
+          <img v-bind:src="item.image" width="400px"/>
+        </el-col>
+        <el-col :lg="14" style="padding: 0 20px 0 0">
+          <h3>Preparation</h3>
           <p>{{ item.instructions }}</p>
+        </el-col>
+      </el-row>
     </div>
 
 
-        
-        
-    </div>
+
+
+  </div>
 </template>
 
 <script>
 
 
 import { modelInstance } from "../data/DinnerModel";
-    
-    
+
+
 export default {
-    
-    props:["model","selectedDishes","numOfGuests"],
-        
-    data: function () {
-       return {
-       status: 'INITIAL',
-       dish: {
-          name:"",
-          instructions:"loading...",
-          extendedIngredients:[],
-            },
-          modelInstance: this.model,
-      
-        }
-       },
-        components: {
-        }
+
+  props:["model","selectedDishes","numOfGuests"],
+
+  data: function () {
+    return {
+      status: 'INITIAL',
+      dish: {
+        name:"",
+        instructions:"loading...",
+        extendedIngredients:[],
+      },
+      modelInstance: this.model,
+
     }
+  },
+  components: {
+  }
+}
 </script>
 
 <style>
-    .backtosearch{
-    position: absolute;
-    right: 20px;
-    top: 120px;
-    }
+.printcontent{
+  padding: 0 20px 0 20px;
+  margin-bottom: 40px;
+}
+
 
 </style>

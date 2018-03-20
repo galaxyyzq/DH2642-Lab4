@@ -16,9 +16,9 @@
           <p class="dishestitle">{{ dish.title }}</p>
           <img v-bind:src="dish.image" />
           <p>{{ dish.instructions }}</p>
-          
+
             <el-button type="primary" round style="margin-top:20px" v-on:click="adddishtomenu" id="dishID">ADD TO MENU</el-button>
-    
+
 
       </el-col>
       <el-col :span="9">
@@ -54,10 +54,10 @@ var dishID = this.id;
 import { modelInstance } from "../data/DinnerModel";
 
 export default {
-    
-    
+
+
   props:["id","model","selectedDishes","numOfGuests"],
-    
+
   mounted() {
     modelInstance.getDish(this.id).then(dish => {
       this.status = 'LOADED'
@@ -71,11 +71,9 @@ export default {
 
     adddishtomenu:function(){
 
-      // this.selectedDishes.push(this.dish);
       var isDishExist=false;
 
       for (var i = 0; i <this.selectedDishes.length; i++) {
-        console.log(this.dish.id);
         if (this.dish.id === this.selectedDishes[i].id) {
           alert('This dish is already in your menu');
           isDishExist=true;
@@ -86,7 +84,7 @@ export default {
         this.selectedDishes.push(this.dish);
       }
     }
-      
+
   },
 
   data: function () {

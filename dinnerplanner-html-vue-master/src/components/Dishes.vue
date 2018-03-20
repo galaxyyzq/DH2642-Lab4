@@ -5,7 +5,7 @@
     <!-- Search function -->
     <div class="searchbar">
 
-      <el-select id="selecttype" v-model="dishtype" placeholder="Type" ref="dishtype2">
+      <el-select id="selecttype" v-model="dishtype" placeholder="Type" ref="dishtype2" style="margin-right:10px">
             <el-option label="Main Course" value="main+course"></el-option>
             <el-option label="Appetizer" value="appetizer"></el-option>
             <el-option label="Salad" value="salad"></el-option>
@@ -14,7 +14,7 @@
             <el-option label="Sauce" value="sauce"></el-option>
         </el-select>
 
-      <el-input placeholder="Search the Dish" v-model="dishinput" style="width: 300px; margin-left:10px"clearable></el-input>
+      <el-input placeholder="Search the Dish" v-model="dishinput" style="width: 300px"clearable></el-input>
 
     </div>
 
@@ -22,7 +22,7 @@
     <em v-if='status === "INITIAL"'>Loading...</em>
     <b v-else-if='status === "ERROR"'>Failed to load data, please try again</b>
     <router-link :to="'/dish/' + dish.id" :id="dish.id" :key="dish.id" v-for="dish in filterDish" >
-      <el-col  :xs="12" :sm="10" :md="5" :lg="5" :xl="5" class="dishbox">
+      <el-col  :xs="11" :sm="11" :md="5" :lg="5" :xl="5" class="dishbox">
         <el-card :body-style="{ padding: '0px', height: '260px'}">
           <img v-bind:src="baseURI + dish.image" class="dishpic"/>
           <div class="dishtext">{{ dish.title }}</div>

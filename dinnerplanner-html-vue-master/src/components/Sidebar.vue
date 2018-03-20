@@ -2,9 +2,10 @@
   <div class="sidebar">
     <p class="sidebartitle">Selected Dish<p>
       <p>Total number of guests: {{ numOfGuests.length }}</p>
-<!--      <el-input-number v-model="numberOfGuests" @change="onDidChangeNumberOfGuests" :min="1" :max="20"></el-input-number>-->
-      <el-button  v-on:click="plus">+</el-button>{{ numOfGuests.length }}
+     <!-- <el-input-number v-model="numberOfGuests" @change="onDidChangeNumberOfGuests" :min="1" :max="20"></el-input-number> -->
       <el-button  v-on:click="minus">-</el-button>
+        <span style="margin:0 15px 0 15px">{{ numOfGuests.length }}</span>
+      <el-button  v-on:click="plus">+</el-button>
 
       <div class="menudish">
         <el-row>

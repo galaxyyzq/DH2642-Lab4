@@ -2,7 +2,7 @@
   <div class="select-dish">
     <!-- We pass the model as property to the Sidebar component -->
     <el-row>
-      <el-col :span="6">
+      <el-col :span="6" class="hidden-xs-only">
         <sidebar :model="this.model" v-bind:selectedDishes="selectedDishes" v-bind:numOfGuests="numOfGuests"/>
       </el-col>
       <el-col :span="18">
