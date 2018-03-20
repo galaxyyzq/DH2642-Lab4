@@ -1,6 +1,16 @@
 <template>
   <div class="select-dish">
     <!-- We pass the model as property to the Sidebar component -->
+
+    <!-- collapse menu in small size screen -->
+    <el-row class="hidden-sm-and-up">
+      <el-collapse >
+        <el-collapse-item title="Dish Menu" name="1">
+              <sidebar :model="this.model" v-bind:selectedDishes="selectedDishes" v-bind:numOfGuests="numOfGuests"/>
+        </el-collapse-item>
+      </el-collapse>
+    </el-row>
+
     <el-row>
       <el-col :span="6" class="hidden-xs-only">
         <sidebar :model="this.model" v-bind:selectedDishes="selectedDishes" v-bind:numOfGuests="numOfGuests"/>

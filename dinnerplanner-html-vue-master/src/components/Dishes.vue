@@ -5,7 +5,7 @@
     <!-- Search function -->
     <div class="searchbar">
 
-      <el-select id="selecttype" v-model="dishtype" placeholder="Type" ref="dishtype2" style="margin-right:10px">
+      <el-select id="selecttype" v-model="dishtype" placeholder="Type" ref="dishtype2" style="margin: 0 10px 10px 0">
             <el-option label="Main Course" value="main+course"></el-option>
             <el-option label="Appetizer" value="appetizer"></el-option>
             <el-option label="Salad" value="salad"></el-option>
@@ -14,7 +14,7 @@
             <el-option label="Sauce" value="sauce"></el-option>
         </el-select>
 
-      <el-input placeholder="Search the Dish" v-model="dishinput" style="width: 300px"clearable></el-input>
+      <el-input placeholder="Search the Dish" v-model="dishinput" style="width: 300px; margin-bottom: 10px"clearable></el-input>
 
     </div>
 

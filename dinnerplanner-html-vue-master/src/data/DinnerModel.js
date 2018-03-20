@@ -21,7 +21,7 @@ const DinnerModel = function () {
   this.getNumberOfGuests = function () {
     return numberOfGuests;
   };
-  
+
 //Adds the passed dish to the menu. If the dish of that type already exists on the menu
 //it is removed from the menu and the new one added.
 
@@ -43,7 +43,7 @@ this.removeDishFromMenu = function(iditem) {
   // API Calls
 
   this.getAllDishes = function (selectType) {
-    const url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=18&offset=0&query=burger&type='+String(selectType);
+    const url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=18&offset=0&type='+String(selectType);
     return fetch(url, httpOptions)
       .then(processResponse)
       .catch(handleError)
