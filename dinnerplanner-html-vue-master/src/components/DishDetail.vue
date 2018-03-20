@@ -12,7 +12,7 @@
     </el-row>
 
     <el-row>
-      <el-col :span="15" style="padding-right:15px;">
+      <el-col :lg="15" :md="20" style="padding-right:15px;">
           <p class="dishestitle">{{ dish.title }}</p>
           <img v-bind:src="dish.image" />
           <p>{{ dish.instructions }}</p>
@@ -21,7 +21,7 @@
 
 
       </el-col>
-      <el-col :span="9">
+      <el-col :lg="9" :md="20">
         <div class="ingredientbox">
           <h3>Ingredient Detail</h3>
           <hr>
